@@ -20,7 +20,7 @@ var files = {
   ],
 
   browserify: [
-    './src/main.js'
+    './src/main.jsx'
   ],
 
   // Add your css files here
@@ -33,7 +33,7 @@ var browserifyTask = function (options) {
   var bundler = browserify({
     entries: [options.src], // Only need initial file, browserify finds the deps
     transform: [
-      ['babelify', {presets: ['react']}]
+      ['babelify', {presets: ['es2015', 'react']}]
     ],
     debug: options.development, // Sourcemapping
     cache: {}, // Requirement of watchify
@@ -141,7 +141,7 @@ gulp.task('default', function() {
   cssTask(cssOpt);
   connect.server(serverOpt);
 
-  var watcher = gulp.watch(Array.prototype.concat(files.js, files.css), function () {
+  var watcher = gulp.watch(files.css, function () {
     cssTask(cssOpt);
   });
 
