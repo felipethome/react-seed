@@ -1,17 +1,17 @@
 {
-  "name": "react-slider",
+  "name": "react-seed",
   "version": "1.0.0",
-  "description": "Reusable slider component built with React.",
+  "description": "Seed project for React.",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/felipethome/react-slider.git"
+    "url": "git+https://github.com/felipethome/react-seed.git"
   },
   "author": "Felipe Thome",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/felipethome/react-slider/issues"
+    "url": "https://github.com/felipethome/react-seed/issues"
   },
-  "homepage": "https://github.com/felipethome/react-slider#readme",
+  "homepage": "https://github.com/felipethome/react-seed#readme",
   "dependencies": {
     "react": "^0.14.6",
     "react-dom": "^0.14.6"
