@@ -1,0 +1,42 @@
+{
+  "name": "react-slider",
+  "version": "1.0.0",
+  "description": "Reusable slider component built with React.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/felipethome/react-slider.git"
+  },
+  "author": "Felipe Thome",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/felipethome/react-slider/issues"
+  },
+  "homepage": "https://github.com/felipethome/react-slider#readme",
+  "dependencies": {
+    "react": "^0.14.6",
+    "react-dom": "^0.14.6"
+  },
+  "devDependencies": {
+    "babel-eslint": "^5.0.0-beta6",
+    "babelify": "^7.2.0",
+    "browserify": "^13.0.0",
+    "eslint": "^1.10.3",
+    "eslint-plugin-react": "^3.15.0",
+    "gulp": "^3.9.0",
+    "gulp-concat": "^2.6.0",
+    "gulp-connect": "^2.3.1",
+    "gulp-cssmin": "^0.1.7",
+    "gulp-if": "^2.0.0",
+    "gulp-notify": "^2.2.0",
+    "gulp-streamify": "^1.0.2",
+    "gulp-uglify": "^1.5.1",
+    "gulp-util": "^3.0.7",
+    "vinyl-source-stream": "^1.1.0",
+    "watchify": "^3.7.0"
+  },
+  "scripts": {
+    "lint": "eslint src",
+    "gulp": "gulp",
+    "gulpDeploy": "gulp deploy"
+  }
+}
