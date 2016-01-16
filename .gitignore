@@ -1,5 +1,5 @@
 node_modules
 bower_components
-build
+build/*
 !build/index.html
 dist
