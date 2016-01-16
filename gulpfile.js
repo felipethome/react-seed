@@ -13,6 +13,7 @@ var uglify = require('gulp-uglify');
 var watchify = require('watchify');
 
 var files = {
+  // Add here any library dependencies your jsx files have
   dependencies: [
     'react',
     'react-dom'
@@ -22,6 +23,7 @@ var files = {
     './src/main.js'
   ],
 
+  // Add your css files here
   css: [
   ]
 };
