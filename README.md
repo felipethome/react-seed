@@ -5,7 +5,15 @@ Seed project for React. Type one command and you will spawn a server with live-r
 This seed uses Browserify to support modules, Babel to transform your *jsx* files written with ES6 features in pure Javascript (ES5), and ESLint to help you keep your code free of bugs.
 
 ## Build
-Clone this repository and run:
+Clone this repository:
+    
+    https://github.com/felipethome/react-seed-es6
+
+Install dependencies:
+    
+    npm install
+
+Run:
     
     npm run gulp
 
