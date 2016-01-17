@@ -1,10 +1,10 @@
-var gulp = require('gulp');
 var babelify = require('babelify');
 var browserify = require('browserify');
 var connect = require('gulp-connect');
 var cssmin = require('gulp-cssmin');
 var notify = require('gulp-notify');
 var concat = require('gulp-concat');
+var gulp = require('gulp');
 var gulpif = require('gulp-if');
 var gutil = require('gulp-util');
 var source = require('vinyl-source-stream');
@@ -33,14 +33,14 @@ var files = {
 var browserifyTask = function (options) {
 
   var bundler = browserify({
-    entries: [options.src], // Only need initial file, browserify finds the deps
+    entries: [options.src],
     transform: [
       ['babelify', {presets: ['es2015', 'react']}]
     ],
-    debug: options.development, // Sourcemapping
+    debug: options.development,
     cache: {}, // Requirement of watchify
     packageCache: {}, // Requirement of watchify
-    fullPaths: options.development // Preserve original paths in the bundle
+    fullPaths: options.development
   });
 
   var rebundle = function () {
@@ -58,9 +58,6 @@ var browserifyTask = function (options) {
       }));
   };
 
-  // 1. Fire up Watchify when developing.
-  // 2. We create a separate bundle for our dependencies as they
-  // should not rebundle on file changes.
   if (options.development) {
     bundler.external(files.dependencies);
     bundler = watchify(bundler);
@@ -83,7 +80,6 @@ var browserifyTask = function (options) {
       }));
   }
 
-  // The first build needs to be triggered manually.
   rebundle();
 
 };
