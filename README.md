@@ -1,8 +1,9 @@
 # react-seed
-Seed project for React. With just one command you will spawn a server with live-reload when your jsx or css files change. You, also, will be able to build a production version with all your js and css files concatenated and minified.
+Seed project for React. With just one command you can spawn a server with live-reload (any change made in one of your *jsx* or *css* files will automaticaly reload the page where the components/css are loaded).  
+Another command and you will be able to build a production version with all your *jsx* and *css* files concatenated and minified.
 
 ## Build
-Run:
+Clone this repository and run:
     
     npm run gulp
 
