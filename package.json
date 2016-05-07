@@ -7,7 +7,7 @@
     "url": "git+https://github.com/felipethome/react-seed.git"
   },
   "author": "Felipe Thome",
-  "license": "ISC",
+  "license": "BSD-3-Clause",
   "bugs": {
     "url": "https://github.com/felipethome/react-seed/issues"
   },
