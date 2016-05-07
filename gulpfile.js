@@ -121,7 +121,7 @@ gulp.task('deploy', function () {
     development: false,
     src: files.browserify,
     dest: './dist/scripts',
-    output: 'bundle.js'
+    output: 'app.js'
   };
 
   var cssOpt = {
@@ -144,7 +144,7 @@ gulp.task('default', function() {
   var browserifyDepsOpt = {
     development: true,
     src: files.dependencies,
-    dest: './dist/scripts',
+    dest: './build/scripts',
     output: 'vendors.js',
   };
 
@@ -152,7 +152,7 @@ gulp.task('default', function() {
     development: true,
     src: files.browserify,
     dest: './build/scripts',
-    output: 'bundle.js'
+    output: 'app.js'
   };
 
   var cssOpt = {
