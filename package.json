@@ -38,7 +38,7 @@
   },
   "scripts": {
     "lint": "eslint src",
-    "gulp": "gulp",
-    "gulpDeploy": "gulp deploy"
+    "dev": "gulp",
+    "deploy": "gulp deploy"
   }
 }
