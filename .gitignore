@@ -3,3 +3,4 @@ bower_components
 build/*
 !build/index.html
 dist
+*.log

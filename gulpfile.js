@@ -2,6 +2,7 @@ var babelify = require('babelify');
 var browserify = require('browserify');
 var connect = require('gulp-connect');
 var cssmin = require('gulp-cssmin');
+var merge = require('merge-stream');
 var notify = require('gulp-notify');
 var concat = require('gulp-concat');
 var gulp = require('gulp');
@@ -23,7 +24,7 @@ var files = {
     './src/main.jsx'
   ],
 
-  // Add your css files here
+  // Add your css files here, if there is any
   css: [
   ]
 };
@@ -40,16 +41,17 @@ var browserifyTask = function (options) {
     debug: options.development,
     cache: {}, // Requirement of watchify
     packageCache: {}, // Requirement of watchify
-    fullPaths: options.development
+    fullPaths: options.development,
+    options: ['.js', '.jsx', '.json']
   });
 
   var rebundle = function () {
     var start = Date.now();
     console.log('Building APP bundle');
-    bundler
+    return bundler
       .bundle()
       .on('error', gutil.log)
-      .pipe(source('main.js'))
+      .pipe(source(options.output))
       .pipe(gulpif(!options.development, streamify(uglify())))
       .pipe(gulp.dest(options.dest))
       .pipe(gulpif(options.development, connect.reload()))
@@ -58,29 +60,36 @@ var browserifyTask = function (options) {
       }));
   };
 
+  bundler.external(files.dependencies);
+  
   if (options.development) {
-    bundler.external(files.dependencies);
     bundler = watchify(bundler);
     bundler.on('update', rebundle);
-
-    var vendorsBundler = browserify({
-     debug: true,
-     require: files.dependencies
-    });
-
-    var start = new Date();
-    console.log('Building VENDORS bundle');
-    vendorsBundler.bundle()
-      .on('error', gutil.log)
-      .pipe(source('vendors.js'))
-      .pipe(gulpif(!options.development, streamify(uglify())))
-      .pipe(gulp.dest(options.dest))
-      .pipe(notify(function () {
-        console.log('VENDORS bundle built in ' + (Date.now() - start) + 'ms');
-      }));
   }
 
-  rebundle();
+  return rebundle();
+
+};
+
+var browserifyDepsTask = function (options) {
+
+  var vendorsBundler = browserify({
+    debug: options.development,
+    require: files.dependencies,
+  });
+
+  var start = new Date();
+  console.log('Building VENDORS bundle');
+  return vendorsBundler
+    .bundle()
+    .on('error', gutil.log)
+    .pipe(source(options.output))
+    .pipe(gulpif(!options.development, streamify(uglify())))
+    .on('error', gutil.log)
+    .pipe(gulp.dest(options.dest))
+    .pipe(notify(function () {
+      console.log('VENDORS bundle built in ' + (Date.now() - start) + 'ms');
+    }));
 
 };
 
@@ -88,8 +97,8 @@ var cssTask = function (options) {
 
   var start = new Date();
   console.log('Building CSS bundle');
-  gulp.src(options.src)
-    .pipe(concat('styles.css'))
+  return gulp.src(options.src)
+    .pipe(concat(options.output))
     .pipe(gulpif(!options.development, cssmin()))
     .pipe(gulp.dest(options.dest))
     .pipe(gulpif(options.development, connect.reload()))
@@ -101,32 +110,56 @@ var cssTask = function (options) {
 
 gulp.task('deploy', function () {
 
-  browserifyTask({
+  var browserifyDepsOpt = {
+    development: false,
+    src: files.dependencies,
+    dest: './dist/scripts',
+    output: 'vendors.js',
+  };
+
+  var browserifyOpt = {
     development: false,
     src: files.browserify,
-    dest: './dist/scripts'
-  });
+    dest: './dist/scripts',
+    output: 'bundle.js'
+  };
 
-  cssTask({
+  var cssOpt = {
     development: false,
     src: files.css,
-    dest: './dist/styles'
-  });
+    dest: './dist/styles',
+    output: 'styles.css',
+  };
+
+  return merge(
+    browserifyDepsTask(browserifyDepsOpt),
+    browserifyTask(browserifyOpt),
+    cssTask(cssOpt)
+  );
 
 });
 
 gulp.task('default', function() {
 
+  var browserifyDepsOpt = {
+    development: true,
+    src: files.dependencies,
+    dest: './dist/scripts',
+    output: 'vendors.js',
+  };
+
   var browserifyOpt = {
     development: true,
     src: files.browserify,
-    dest: './build/scripts'
+    dest: './build/scripts',
+    output: 'bundle.js'
   };
 
   var cssOpt = {
     development: true,
     src: files.css,
-    dest: './build/styles'
+    dest: './build/styles',
+    output: 'styles.css',
   };
 
   var serverOpt = {
@@ -135,12 +168,16 @@ gulp.task('default', function() {
     livereload: true
   };
 
-  browserifyTask(browserifyOpt);
-  cssTask(cssOpt);
   connect.server(serverOpt);
 
   var watcher = gulp.watch(files.css, function () {
     cssTask(cssOpt);
   });
+
+  return merge(
+    browserifyDepsTask(browserifyDepsOpt),
+    browserifyTask(browserifyOpt),
+    cssTask(cssOpt)
+  );
 
 });
