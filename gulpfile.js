@@ -17,11 +17,11 @@ var files = {
   // Add here any library dependencies your jsx files have
   dependencies: [
     'react',
-    'react-dom'
+    'react-dom',
   ],
 
   browserify: [
-    './src/main.js'
+    './src/main.js',
   ],
 
   // Add your css files here, if there is any
@@ -121,7 +121,7 @@ gulp.task('deploy', function () {
     development: false,
     src: files.browserify,
     dest: './dist/scripts',
-    output: 'app.js'
+    output: 'app.js',
   };
 
   var cssOpt = {
@@ -139,7 +139,7 @@ gulp.task('deploy', function () {
 
 });
 
-gulp.task('default', function() {
+gulp.task('default', function () {
 
   var browserifyDepsOpt = {
     development: true,
@@ -152,7 +152,7 @@ gulp.task('default', function() {
     development: true,
     src: files.browserify,
     dest: './build/scripts',
-    output: 'app.js'
+    output: 'app.js',
   };
 
   var cssOpt = {
@@ -165,7 +165,7 @@ gulp.task('default', function() {
   var serverOpt = {
     root: './build',
     port: 8889,
-    livereload: true
+    livereload: true,
   };
 
   connect.server(serverOpt);
