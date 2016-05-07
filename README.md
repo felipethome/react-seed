@@ -15,11 +15,11 @@ Install dependencies:
 
 Run:
     
-    npm run gulp
+    npm run dev
 
 Check http://localhost:8889
 
 ## Production version
 Run:
     
-    npm run gulpDeploy
+    npm run deploy
