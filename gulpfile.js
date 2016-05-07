@@ -21,7 +21,7 @@ var files = {
   ],
 
   browserify: [
-    './src/main.jsx'
+    './src/main.js'
   ],
 
   // Add your css files here, if there is any
