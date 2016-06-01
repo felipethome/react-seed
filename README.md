@@ -7,7 +7,7 @@ This seed uses Browserify to support modules, Babel to transform your *jsx* file
 ## Build
 Clone this repository:
     
-    https://github.com/felipethome/react-seed-es6
+    git clone https://github.com/felipethome/react-seed-es6
 
 Install dependencies:
     
