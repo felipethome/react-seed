@@ -1,4 +1,5 @@
-var babelify = require('babelify');
+/*eslint-disable no-console, no-var, prefer-arrow-callback, prefer-template */
+
 var browserify = require('browserify');
 var connect = require('gulp-connect');
 var cssmin = require('gulp-cssmin');
@@ -25,8 +26,7 @@ var files = {
   ],
 
   // Add your css files here, if there is any
-  css: [
-  ]
+  css: [],
 };
 
 // ----- You probably will not need to change anything under this line -----
@@ -36,13 +36,13 @@ var browserifyTask = function (options) {
   var bundler = browserify({
     entries: [options.src],
     transform: [
-      ['babelify', {presets: ['es2015', 'react']}]
+      ['babelify', {presets: ['es2015', 'react']}],
     ],
     debug: options.development,
     cache: {}, // Requirement of watchify
     packageCache: {}, // Requirement of watchify
     fullPaths: options.development,
-    options: ['.js', '.jsx', '.json']
+    options: ['.js', '.jsx', '.json'],
   });
 
   var rebundle = function () {
@@ -61,7 +61,7 @@ var browserifyTask = function (options) {
   };
 
   bundler.external(files.dependencies);
-  
+
   if (options.development) {
     bundler = watchify(bundler);
     bundler.on('update', rebundle);
@@ -170,7 +170,7 @@ gulp.task('default', function () {
 
   connect.server(serverOpt);
 
-  var watcher = gulp.watch(files.css, function () {
+  gulp.watch(files.css, function () {
     cssTask(cssOpt);
   });
 
