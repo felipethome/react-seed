@@ -19,6 +19,16 @@ var files = {
   dependencies: [
     'react',
     'react-dom',
+
+    // If you add any of the following addons to your project don't forget to
+    // uncomment the respective line, otherwise you will end up with two copies
+    // of React in your app.
+    // 'react-addons-transition-group',
+    // 'react-addons-css-transition-group',
+
+    // Don't forget to uncomment this line when using react-perf since it needs
+    // to be in the same file React is.
+    // 'react-addons-perf',
   ],
 
   browserify: [
