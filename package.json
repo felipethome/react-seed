@@ -6,9 +6,9 @@
   "author": "Felipe Thome",
   "license": "BSD-3-Clause",
   "bugs": {
-    "url": "https://github.com/felipethome/react-seed/issues"
+    "url": "https://github.com/felipethome/react-seed-es6/issues"
   },
-  "homepage": "https://github.com/felipethome/react-seed#readme",
+  "homepage": "https://github.com/felipethome/react-seed-es6",
   "dependencies": {
     "react": "^15.2.1",
     "react-dom": "^15.2.1"
