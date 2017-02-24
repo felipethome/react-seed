@@ -46,7 +46,17 @@ var browserifyTask = function (options) {
   var bundler = browserify({
     entries: [options.src],
     transform: [
-      ['babelify', {presets: ['es2015', 'react']}],
+      ['babelify', {
+        presets: [
+          'es2015',
+          'stage-2',
+          'react',
+        ],
+        plugins: [
+          'transform-class-properties',
+          'babel-plugin-transform-object-assign',
+        ],
+      }],
     ],
     debug: options.development,
     cache: {}, // Requirement of watchify
